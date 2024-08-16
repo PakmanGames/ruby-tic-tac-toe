@@ -1,7 +1,7 @@
 class Board
   attr_accessor :board
 
-  WINNING_INDEXES = [
+  @@WINNING_INDEXES = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -17,9 +17,33 @@ class Board
   end
 
   def display_board
-    
+    output = '----------' + "\n"
+    board.each_with_index do |item, index|
+      output += if (index + 1) % 3 == 0
+                  item.to_s + "\n" + '----------' + "\n"
+                else
+                  item.to_s + ' | '
+                end
+    end
+    output
+  end
+
+  def find_winner
+    @@WINNING_INDEXES.each do |indexes|
+      a, b, c = indexes
+      return board[a] if board[a] === board[b] && board[b] === board[c]
+    end
+    nil
   end
 end
 
-board = Board.new()
-puts board.board
+# for testing
+
+# board = Board.new
+# puts board.display_board
+# board.board[0] = 'X'
+# board.board[1] = 'X'
+# board.board[2] = 'X'
+
+# puts board.display_board
+# puts board.find_winner
