@@ -14,6 +14,12 @@ class Game
 
   def play_game
     play_round until board.draw? || board.find_winner
+    if board.draw?
+      puts "Game ends in a draw at round #{round - 1}!"
+    elsif board.find_winner == 'X' || board.find_winner == 'O'
+      winner = board.find_winner == 'X' ? player_x : player_o
+      puts "The winner is #{winner.name} (#{winner.shape})! Victory on round #{round - 1}"
+    end
   end
 
   def play_round
