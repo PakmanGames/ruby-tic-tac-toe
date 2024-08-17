@@ -17,23 +17,27 @@ class Board
   end
 
   def display_board
-    output = '----------' + "\n"
+    output = "----------\n"
     board.each_with_index do |item, index|
-      output += if (index + 1) % 3 == 0
-                  item.to_s + "\n" + '----------' + "\n"
-                else
-                  item.to_s + ' | '
-                end
+      output += ((index + 1) % 3).zero? ? "#{item} \n----------\n" : "#{item} | "
     end
     output
+  end
+
+  def change_tile(location, shape)
+    board[location - 1] = shape
   end
 
   def find_winner
     @@WINNING_INDEXES.each do |indexes|
       a, b, c = indexes
-      return board[a] if board[a] === board[b] && board[b] === board[c]
+      return board[a] if board[a] == board[b] && board[b] == board[c]
     end
     nil
+  end
+
+  def draw?
+    board.all? { |element| %w[X O].include?(element) }
   end
 end
 

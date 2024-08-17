@@ -7,7 +7,7 @@ class Player
   end
 
   def self.create_player(shape)
-    puts "What's your name?"
+    puts "What's the name of player #{shape}?"
     name = gets.chomp
     Player.new(name, shape)
   end
