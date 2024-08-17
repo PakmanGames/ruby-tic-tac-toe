@@ -12,12 +12,11 @@ class Game
     @round = 1
   end
 
-  def start_game
+  def play_game
     play_round until board.draw? || board.find_winner
   end
 
   def play_round
-    location = String.new
     puts "Round: #{round}"
     puts board.display_board
     if (round % 2).zero?
@@ -27,14 +26,8 @@ class Game
       puts "#{player_x.name}'s turn (#{player_x.shape})"
       current = player_x.shape
     end
-    until [1, 2, 3, 4, 5, 6, 7, 8, 9].include?(location.to_i)
-      puts 'Enter the spot you want to place your shape (tiles 1 - 9 unless taken):'
-      location = gets.chomp
-    end
+
     self.round += 1
-    board.change_tile(location.to_i, current)
+    board.change_tile(current)
   end
 end
-
-game = Game.new
-game.start_game

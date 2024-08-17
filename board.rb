@@ -24,8 +24,16 @@ class Board
     output
   end
 
-  def change_tile(location, shape)
-    board[location - 1] = shape
+  def change_tile(shape)
+    location = String.new
+    locations = board.dup
+    locations.select! { |element| element != 'X' && element != 'O' }
+    until locations.include?(location.to_i)
+      puts 'Enter the spot you want to place your shape:'
+      puts "These are the available locations: #{locations}"
+      location = gets.chomp
+    end
+    board[location.to_i - 1] = shape
   end
 
   def find_winner
@@ -40,14 +48,3 @@ class Board
     board.all? { |element| %w[X O].include?(element) }
   end
 end
-
-# for testing
-
-# board = Board.new
-# puts board.display_board
-# board.board[0] = 'X'
-# board.board[1] = 'X'
-# board.board[2] = 'X'
-
-# puts board.display_board
-# puts board.find_winner
