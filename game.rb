@@ -3,10 +3,12 @@
 require_relative './board'
 require_relative './player'
 
+# Represents the game tic-tac-toe, utilizes other classes for certain elements
 class Game
   attr_accessor :round
   attr_reader :board, :player_x, :player_o
 
+  # Creates player and board objects which are required for game functionality
   def initialize
     @player_x = Player.create_player('X')
     @player_o = Player.create_player('O')
@@ -14,6 +16,7 @@ class Game
     @round = 1
   end
 
+  # Starts game and ends if there's a winner or ends in draw
   def play_game
     play_round until board.draw? || board.find_winner
     if board.draw?
@@ -24,6 +27,7 @@ class Game
     end
   end
 
+  # Round logic to display board and determine which player's turn it is
   def play_round
     puts "Round: #{round}"
     puts board.display_board
